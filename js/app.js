@@ -625,7 +625,7 @@ function initAddCustomApi() {
 	
 	// 导入配置
 	for (let item in libreTVSettings.data) {
-	    localStorage.setItem(item, config.data[item]);
+	    localStorage.setItem(item, libreTVSettings.data[item]);
 	}
 	
 	customAPIs = JSON.parse(localStorage.getItem('customAPIs') || '[]'); 
