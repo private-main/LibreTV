@@ -606,7 +606,7 @@ function initAddCustomApi(name,url,detail) {
     updateSelectedApiCount();
     checkAdultAPIsSelected();
 
-    showToast('已添加自定义API: ' + name, 'success');
+    showToast('已添加自定义API : ' + name, 'success');
 }
 
 // 移除自定义API
