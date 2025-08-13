@@ -1307,11 +1307,11 @@ async function importConfig() {
             throw new Error('配置文件格式不正确：缺少正确的 name 字段');
         }
 
-        // 验证哈希（需要实现 sha256 函数）
-        const dataHash = await sha256(JSON.stringify(config.data));
-        if (dataHash !== config.hash) {
-            throw new Error('配置文件哈希值不匹配，数据可能被篡改');
-        }
+        // // 验证哈希（需要实现 sha256 函数）
+        // const dataHash = await sha256(JSON.stringify(config.data));
+        // if (dataHash !== config.hash) {
+        //     throw new Error('配置文件哈希值不匹配，数据可能被篡改');
+        // }
 
         // 写入 localStorage
         for (let key in config.data) {
