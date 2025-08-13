@@ -1249,46 +1249,85 @@ async function importConfigFromUrl() {
     });
 }
 
-// 配置文件导入功能
+// // 配置文件导入功能
+// async function importConfig() {
+//     showImportBox(async (file) => {
+//         try {
+//             // 检查文件类型
+//             if (!(file.type === 'application/json' || file.name.endsWith('.json'))) throw '文件类型不正确';
+
+//             // 检查文件大小
+//             if (file.size > 1024 * 1024 * 10) throw new Error('文件大小超过 10MB');
+
+//             // 读取文件内容
+//             const content = await new Promise((resolve, reject) => {
+//                 const reader = new FileReader();
+//                 reader.onload = () => resolve(reader.result);
+//                 reader.onerror = () => reject('文件读取失败');
+//                 reader.readAsText(file);
+//             });
+
+//             // 解析并验证配置
+//             const config = JSON.parse(content);
+//             if (config.name !== 'LibreTV-Settings') throw '配置文件格式不正确';
+
+//             // 验证哈希
+//             const dataHash = await sha256(JSON.stringify(config.data));
+//             if (dataHash !== config.hash) throw '配置文件哈希值不匹配';
+
+//             // 导入配置
+//             for (let item in config.data) {
+//                 localStorage.setItem(item, config.data[item]);
+//             }
+
+//             showToast('配置文件导入成功，3 秒后自动刷新本页面。', 'success');
+//             setTimeout(() => {
+//                 window.location.reload();
+//             }, 3000);
+//         } catch (error) {
+//             const message = typeof error === 'string' ? error : '配置文件格式错误';
+//             showToast(`配置文件读取出错 (${message})`, 'error');
+//         }
+//     });
+// }
+
+// 配置文件导入功能（直接从服务器加载）
 async function importConfig() {
-    showImportBox(async (file) => {
-        try {
-            // 检查文件类型
-            if (!(file.type === 'application/json' || file.name.endsWith('.json'))) throw '文件类型不正确';
+    const configUrl = '../LibreTV-Settings.json'; // 根据实际路径调整，比如上一层目录
 
-            // 检查文件大小
-            if (file.size > 1024 * 1024 * 10) throw new Error('文件大小超过 10MB');
+    try {
+        // 获取配置文件
+        const response = await fetch(configUrl);
+        if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        
+        const config = await response.json();
 
-            // 读取文件内容
-            const content = await new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = () => reject('文件读取失败');
-                reader.readAsText(file);
-            });
-
-            // 解析并验证配置
-            const config = JSON.parse(content);
-            if (config.name !== 'LibreTV-Settings') throw '配置文件格式不正确';
-
-            // 验证哈希
-            const dataHash = await sha256(JSON.stringify(config.data));
-            if (dataHash !== config.hash) throw '配置文件哈希值不匹配';
-
-            // 导入配置
-            for (let item in config.data) {
-                localStorage.setItem(item, config.data[item]);
-            }
-
-            showToast('配置文件导入成功，3 秒后自动刷新本页面。', 'success');
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
-        } catch (error) {
-            const message = typeof error === 'string' ? error : '配置文件格式错误';
-            showToast(`配置文件读取出错 (${message})`, 'error');
+        // 验证配置文件基本结构
+        if (config.name !== 'LibreTV-Settings') {
+            throw new Error('配置文件格式不正确：缺少正确的 name 字段');
         }
-    });
+
+        // 验证哈希（需要实现 sha256 函数）
+        const dataHash = await sha256(JSON.stringify(config.data));
+        if (dataHash !== config.hash) {
+            throw new Error('配置文件哈希值不匹配，数据可能被篡改');
+        }
+
+        // 写入 localStorage
+        for (let key in config.data) {
+            localStorage.setItem(key, config.data[key]);
+        }
+
+        showToast('配置文件导入成功，3 秒后自动刷新本页面。', 'success');
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
+
+    } catch (error) {
+        console.error('配置文件加载失败:', error);
+        const message = error.message || '未知错误';
+        showToast(`配置文件加载失败: ${message}`, 'error');
+    }
 }
 
 // async function importConfig() {
