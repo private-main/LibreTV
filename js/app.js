@@ -628,7 +628,7 @@ function initAddCustomApi() {
 	    localStorage.setItem(item, libreTVSettings.data[item]);
 	}
 	
-	customAPIs = JSON.parse(localStorage.getItem('customAPIs') || '[]'); 
+	customAPIs = localStorage.getItem('customAPIs')
 	console.log(customAPIs)
 }
 
