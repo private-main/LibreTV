@@ -13,9 +13,13 @@ let episodesReversed = false;
 
 // 页面初始化
 document.addEventListener('DOMContentLoaded', function () {
+	//初始化自定义api
+	initAddCustomApi();
+	
     // 初始化API复选框
     initAPICheckboxes();
-
+	
+	
     // 初始化自定义API列表
     renderCustomAPIsList();
 
@@ -439,6 +443,20 @@ function addCustomApi() {
     if (isAdultInput) isAdultInput.checked = false;
     document.getElementById('addCustomApiForm').classList.add('hidden');
     showToast('已添加自定义API: ' + name, 'success');
+}
+
+// 初始化添加自定义API
+function initAddCustomApi() {
+	
+	const response = await fetch('../assets/LibreTV-Settings.json');
+	const config = await response.json();
+	// 导入配置
+	for (let item in config.data) {
+	    localStorage.setItem(item, config.data[item]);
+	}
+	
+	customAPIs = JSON.parse(localStorage.getItem('customAPIs') || '[]'); 
+	console.log(customAPIs)
 }
 
 // 移除自定义API
