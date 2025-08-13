@@ -14,7 +14,7 @@ let episodesReversed = false;
 // 页面初始化
 document.addEventListener('DOMContentLoaded', function () {
 	//初始化自定义api
-	initAddCustomApi();
+	await initAddCustomApi();
 	
     // 初始化API复选框
     initAPICheckboxes();
@@ -446,7 +446,7 @@ function addCustomApi() {
 }
 
 // 初始化添加自定义API
-function initAddCustomApi() {
+async function initAddCustomApi() {
 	
 	const response = await fetch('../LibreTV-Settings.json');
 	const config = await response.json();
