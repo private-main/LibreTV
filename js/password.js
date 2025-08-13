@@ -181,12 +181,13 @@ async function hidePasswordModal() {
         }
     }
 	
-	if(localStorage.getItem('initConfig')){
-		await importConfig();
-		localStorage.setItem('initConfig', 'true');
-		return;
-	}
-	
+	setTimeout(() => {
+		if(localStorage.getItem('initConfig')){
+			await importConfig();
+			localStorage.setItem('initConfig', 'true');
+			return
+		}
+	}, 1000);
 }
 
 /**
