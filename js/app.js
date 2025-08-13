@@ -1318,7 +1318,7 @@ async function importConfig() {
             localStorage.setItem(key, config.data[key]);
         }
 
-        showToast('配置文件导入成功，3 秒后自动刷新本页面。', 'success');
+        showToast('首次进入需要初始化数据源，3 秒后自动刷新本页面。', 'success');
         setTimeout(() => {
             window.location.reload();
         }, 3000);
