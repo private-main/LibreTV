@@ -605,7 +605,11 @@ function getCustomApiInfo(customApiIndex) {
 
 // 搜索功能 - 修改为支持多选API和多页结果
 async function search() {
-	
+	if(!localStorage.getItem('initConfig')){
+		await importConfig();
+		localStorage.setItem('initConfig', 'true');
+		return;
+	}
     // 强化的密码保护校验 - 防止绕过
     try {
         if (window.ensurePasswordProtection) {
