@@ -583,6 +583,7 @@ function initCustomApi() {
     apiList.forEach(item => {
         initAddCustomApi(item.name, item.url, item.detail);
     });
+    showToast('已添加自定义API');
 }
 
 
@@ -605,8 +606,6 @@ function initAddCustomApi(name,url,detail) {
     renderCustomAPIsList();
     updateSelectedApiCount();
     checkAdultAPIsSelected();
-
-    showToast('已添加自定义API : ' + name, 'success');
 }
 
 // 移除自定义API
