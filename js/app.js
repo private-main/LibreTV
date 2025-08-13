@@ -1328,7 +1328,7 @@ async function importConfig() {
 	    const currentUrl = window.location.origin + window.location.pathname;
 	    // 加上需要的参数
 		const query = document.getElementById('searchInput').value.trim();
-	    const newUrl = currentUrl + '/s=' + query;
+	    const newUrl = currentUrl + 's=' + query;
 	    // 跳转到新 URL
 	    window.location.href = newUrl;
 
