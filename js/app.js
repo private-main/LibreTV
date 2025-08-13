@@ -448,7 +448,7 @@ function addCustomApi() {
 // 初始化添加自定义API
 function initAddCustomApi() {
 	
-	const response = await fetch('../assets/LibreTV-Settings.json');
+	const response = await fetch('../LibreTV-Settings.json');
 	const config = await response.json();
 	// 导入配置
 	for (let item in config.data) {
