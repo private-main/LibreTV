@@ -447,40 +447,7 @@ function addCustomApi() {
 
 // 初始化添加自定义API
 function initAddCustomApi() {
-	const libreTVSettings = {
-	  "name": "LibreTV-Settings",
-	  "time": "1755051647343",
-	  "cfgVer": "1.0.0",
-	  "data": {
-	    "selectedAPIs": [
-	      "tyyszy",
-	      "bfzy",
-	      "dyttzy",
-	      "ruyi",
-	      "custom_0",
-	      "custom_1",
-	      "custom_2",
-	      "custom_3",
-	      "custom_4",
-	      "custom_5",
-	      "custom_6",
-	      "custom_7",
-	      "custom_8",
-	      "custom_9",
-	      "custom_10",
-	      "custom_11",
-	      "custom_12",
-	      "custom_13",
-	      "custom_14",
-	      "custom_15",
-	      "custom_16",
-	      "custom_17",
-	      "custom_18",
-	      "custom_19",
-	      "custom_20",
-	      "custom_21"
-	    ],
-	    "customAPIs": [
+		customAPIs = [
 	      {
 	        "name": "电影天堂资源",
 	        "url": "http://caiji.dyttzyapi.com/api.php/provide/vod",
@@ -613,22 +580,8 @@ function initAddCustomApi() {
 	        "detail": "",
 	        "isAdult": false
 	      }
-	    ],
-	    "yellowFilterEnabled": "true",
-	    "adFilteringEnabled": "true",
-	    "doubanEnabled": "true",
-	    "hasInitializedDefaults": "true",
-	    "videoSearchHistory": "[]"
-	  },
-	  "hash": "1bf07874be95e9617e5d1dc878fdc70fb465d67ae50252c639dedf3dc83c9249"
+	    ]
 	};
-	
-	// 导入配置
-	for (let item in libreTVSettings.data) {
-	    localStorage.setItem(item,JSON.stringify(libreTVSettings.data[item]));
-	}
-	customAPIs = JSON.parse(localStorage.getItem('customAPIs') || '[]');
-	console.log(customAPIs)
 }
 
 // 移除自定义API
