@@ -605,11 +605,6 @@ function getCustomApiInfo(customApiIndex) {
 
 // 搜索功能 - 修改为支持多选API和多页结果
 async function search() {
-	if(!localStorage.getItem('initConfig')){
-		await importConfig();
-		localStorage.setItem('initConfig', 'true');
-		return;
-	}
 	
     // 强化的密码保护校验 - 防止绕过
     try {
@@ -1325,9 +1320,13 @@ async function importConfig() {
         }
 
         showToast('初次检索需要导入配置文件，3 秒后自动刷新本页面。', 'success');
-        setTimeout(() => {
-            window.location.reload();
-        }, 3000);
+	    // 获取当前地址
+	    const currentUrl = window.location.origin + window.location.pathname;
+	    // 加上需要的参数
+		const query = document.getElementById('searchInput').value.trim();
+	    const newUrl = currentUrl + '/s=' + query;
+	    // 跳转到新 URL
+	    window.location.href = newUrl;
 
     } catch (error) {
         console.error('配置文件加载失败:', error);
