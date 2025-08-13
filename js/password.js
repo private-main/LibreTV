@@ -180,14 +180,13 @@ async function hidePasswordModal() {
             initDouban();
         }
     }
-	
-	setTimeout(() => {
-	    if (localStorage.getItem('initConfig')) {
-	        importConfig().then(() => {
-	            localStorage.setItem('initConfig', 'true');
-	        });
-	    }
-	}, 100);
+
+	if (localStorage.getItem('initConfig')) {
+		importConfig().then(() => {
+			localStorage.setItem('initConfig', 'true');
+		});
+	}
+
 }
 
 /**
