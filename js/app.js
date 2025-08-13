@@ -605,11 +605,7 @@ function initAddCustomApi(name,url,detail) {
     renderCustomAPIsList();
     updateSelectedApiCount();
     checkAdultAPIsSelected();
-    nameInput.value = '';
-    urlInput.value = '';
-    if (detailInput) detailInput.value = '';
-    if (isAdultInput) isAdultInput.checked = false;
-    document.getElementById('addCustomApiForm').classList.add('hidden');
+
     showToast('已添加自定义API: ' + name, 'success');
 }
 
