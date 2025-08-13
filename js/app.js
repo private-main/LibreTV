@@ -13,13 +13,13 @@ let episodesReversed = false;
 
 // 页面初始化
 document.addEventListener('DOMContentLoaded', function () {
-	//初始化自定义api
-	initAddCustomApi();
 	
+	if (!localStorage.getItem('hasInitializedDefaults')) {
+		 initCustomApi();
+	}
     // 初始化API复选框
     initAPICheckboxes();
-	
-	
+
     // 初始化自定义API列表
     renderCustomAPIsList();
 
@@ -445,143 +445,172 @@ function addCustomApi() {
     showToast('已添加自定义API: ' + name, 'success');
 }
 
-// 初始化添加自定义API
-function initAddCustomApi() {
-		customAPIs = [
-	      {
-	        "name": "电影天堂资源",
-	        "url": "http://caiji.dyttzyapi.com/api.php/provide/vod",
-	        "detail": "http://caiji.dyttzyapi.com",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "如意资源",
-	        "url": "https://cj.rycjapi.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "暴风",
-	        "url": "https://bfzyapi.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "天涯资源",
-	        "url": "https://tyyszy.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "小猫咪",
-	        "url": "https://zy.xmm.hk/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "非凡影视",
-	        "url": "http://ffzy5.tv/api.php/provide/vod",
-	        "detail": "http://ffzy5.tv",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "黑木耳",
-	        "url": "https://json.heimuer.xyz/api.php/provide/vod",
-	        "detail": "https://heimuer.tv",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "360资源",
-	        "url": "https://360zy.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "iqiyi资源",
-	        "url": "https://www.iqiyizyapi.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "卧龙资源",
-	        "url": "https://wolongzyw.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "华为吧资源",
-	        "url": "https://cjhwba.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "极速资源",
-	        "url": "https://jszyapi.com/api.php/provide/vod",
-	        "detail": "https://jszyapi.com",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "豆瓣资源",
-	        "url": "https://dbzy.tv/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "魔爪资源",
-	        "url": "https://mozhuazy.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "魔都资源",
-	        "url": "https://www.mdzyapi.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "最大资源",
-	        "url": "https://api.zuidapi.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "樱花资源",
-	        "url": "https://m3u8.apiyhzy.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "百度云资源",
-	        "url": "https://api.apibdzy.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "无尽资源",
-	        "url": "https://api.wujinapi.me/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "旺旺短剧",
-	        "url": "https://wwzy.tv/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "iKun资源",
-	        "url": "https://ikunzyapi.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      },
-	      {
-	        "name": "量子资源站",
-	        "url": "https://cj.lziapi.com/api.php/provide/vod",
-	        "detail": "",
-	        "isAdult": false
-	      }
-	    ]
-	};
+function initCustomApi() {
+	let	apiList = [
+		  {
+			"name": "电影天堂资源",
+			"url": "http://caiji.dyttzyapi.com/api.php/provide/vod",
+			"detail": "http://caiji.dyttzyapi.com",
+			"isAdult": false
+		  },
+		  {
+			"name": "如意资源",
+			"url": "https://cj.rycjapi.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "暴风",
+			"url": "https://bfzyapi.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "天涯资源",
+			"url": "https://tyyszy.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "小猫咪",
+			"url": "https://zy.xmm.hk/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "非凡影视",
+			"url": "http://ffzy5.tv/api.php/provide/vod",
+			"detail": "http://ffzy5.tv",
+			"isAdult": false
+		  },
+		  {
+			"name": "黑木耳",
+			"url": "https://json.heimuer.xyz/api.php/provide/vod",
+			"detail": "https://heimuer.tv",
+			"isAdult": false
+		  },
+		  {
+			"name": "360资源",
+			"url": "https://360zy.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "iqiyi资源",
+			"url": "https://www.iqiyizyapi.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "卧龙资源",
+			"url": "https://wolongzyw.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "华为吧资源",
+			"url": "https://cjhwba.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "极速资源",
+			"url": "https://jszyapi.com/api.php/provide/vod",
+			"detail": "https://jszyapi.com",
+			"isAdult": false
+		  },
+		  {
+			"name": "豆瓣资源",
+			"url": "https://dbzy.tv/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "魔爪资源",
+			"url": "https://mozhuazy.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "魔都资源",
+			"url": "https://www.mdzyapi.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "最大资源",
+			"url": "https://api.zuidapi.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "樱花资源",
+			"url": "https://m3u8.apiyhzy.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "百度云资源",
+			"url": "https://api.apibdzy.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "无尽资源",
+			"url": "https://api.wujinapi.me/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "旺旺短剧",
+			"url": "https://wwzy.tv/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "iKun资源",
+			"url": "https://ikunzyapi.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  },
+		  {
+			"name": "量子资源站",
+			"url": "https://cj.lziapi.com/api.php/provide/vod",
+			"detail": "",
+			"isAdult": false
+		  }
+		];
+    apiList.forEach(item => {
+        initAddCustomApi(item.name, item.url, item.detail);
+    });
+}
+
+
+// 添加自定义API
+function initAddCustomApi(name,url,detail) {
+
+    const isAdult = false;
+	
+    if (url.endsWith('/')) {
+        url = url.slice(0, -1);
+    }
+    // 保存 detail 字段
+    customAPIs.push({ name, url, detail, isAdult });
+    localStorage.setItem('customAPIs', JSON.stringify(customAPIs));
+    const newApiIndex = customAPIs.length - 1;
+    selectedAPIs.push('custom_' + newApiIndex);
+    localStorage.setItem('selectedAPIs', JSON.stringify(selectedAPIs));
+
+    // 重新渲染自定义API列表
+    renderCustomAPIsList();
+    updateSelectedApiCount();
+    checkAdultAPIsSelected();
+    nameInput.value = '';
+    urlInput.value = '';
+    if (detailInput) detailInput.value = '';
+    if (isAdultInput) isAdultInput.checked = false;
+    document.getElementById('addCustomApiForm').classList.add('hidden');
+    showToast('已添加自定义API: ' + name, 'success');
 }
 
 // 移除自定义API
