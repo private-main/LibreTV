@@ -583,7 +583,7 @@ function initCustomApi() {
     apiList.forEach(item => {
         initAddCustomApi(item.name, item.url, item.detail);
     });
-    showToast('已添加自定义API');
+    showToast(' 已添加自定义API ');
 }
 
 
