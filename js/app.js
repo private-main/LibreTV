@@ -1250,46 +1250,71 @@ async function importConfigFromUrl() {
 }
 
 // 配置文件导入功能
+// async function importConfig() {
+//     showImportBox(async (file) => {
+//         try {
+//             // 检查文件类型
+//             if (!(file.type === 'application/json' || file.name.endsWith('.json'))) throw '文件类型不正确';
+
+//             // 检查文件大小
+//             if (file.size > 1024 * 1024 * 10) throw new Error('文件大小超过 10MB');
+
+//             // 读取文件内容
+//             const content = await new Promise((resolve, reject) => {
+//                 const reader = new FileReader();
+//                 reader.onload = () => resolve(reader.result);
+//                 reader.onerror = () => reject('文件读取失败');
+//                 reader.readAsText(file);
+//             });
+
+//             // 解析并验证配置
+//             const config = JSON.parse(content);
+//             if (config.name !== 'LibreTV-Settings') throw '配置文件格式不正确';
+
+//             // 验证哈希
+//             const dataHash = await sha256(JSON.stringify(config.data));
+//             if (dataHash !== config.hash) throw '配置文件哈希值不匹配';
+
+//             // 导入配置
+//             for (let item in config.data) {
+//                 localStorage.setItem(item, config.data[item]);
+//             }
+
+//             showToast('配置文件导入成功，3 秒后自动刷新本页面。', 'success');
+//             setTimeout(() => {
+//                 window.location.reload();
+//             }, 3000);
+//         } catch (error) {
+//             const message = typeof error === 'string' ? error : '配置文件格式错误';
+//             showToast(`配置文件读取出错 (${message})`, 'error');
+//         }
+//     });
+// }
+
 async function importConfig() {
-    showImportBox(async (file) => {
-        try {
-            // 检查文件类型
-            if (!(file.type === 'application/json' || file.name.endsWith('.json'))) throw '文件类型不正确';
 
-            // 检查文件大小
-            if (file.size > 1024 * 1024 * 10) throw new Error('文件大小超过 10MB');
+	try {
+		// 内容
+		const content = `{"name":"LibreTV-Settings","time":"1755051647343","cfgVer":"1.0.0","data":{"selectedAPIs":"[\\"tyyszy\\",\\"bfzy\\",\\"dyttzy\\",\\"ruyi\\",\\"custom_0\\",\\"custom_1\\",\\"custom_2\\",\\"custom_3\\",\\"custom_4\\",\\"custom_5\\",\\"custom_6\\",\\"custom_7\\",\\"custom_8\\",\\"custom_9\\",\\"custom_10\\",\\"custom_11\\",\\"custom_12\\",\\"custom_13\\",\\"custom_14\\",\\"custom_15\\",\\"custom_16\\",\\"custom_17\\",\\"custom_18\\",\\"custom_19\\",\\"custom_20\\",\\"custom_21\\"]","customAPIs":"[{\\"name\\":\\"电影天堂资源\\",\\"url\\":\\"http://caiji.dyttzyapi.com/api.php/provide/vod\\",\\"detail\\":\\"http://caiji.dyttzyapi.com\\",\\"isAdult\\":false},{\\"name\\":\\"如意资源\\",\\"url\\":\\"https://cj.rycjapi.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"暴风\\",\\"url\\":\\"https://bfzyapi.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"天涯资源\\",\\"url\\":\\"https://tyyszy.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"小猫咪\\",\\"url\\":\\"https://zy.xmm.hk/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"非凡影视\\",\\"url\\":\\"http://ffzy5.tv/api.php/provide/vod\\",\\"detail\\":\\"http://ffzy5.tv\\",\\"isAdult\\":false},{\\"name\\":\\"黑木耳\\",\\"url\\":\\"https://json.heimuer.xyz/api.php/provide/vod  \\",\\"detail\\":\\"https://heimuer.tv  \\",\\"isAdult\\":false},{\\"name\\":\\"360资源\\",\\"url\\":\\"https://360zy.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"iqiyi资源\\",\\"url\\":\\"https://www.iqiyizyapi.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"卧龙资源\\",\\"url\\":\\"https://wolongzyw.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"华为吧资源\\",\\"url\\":\\"https://cjhwba.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"极速资源\\",\\"url\\":\\"https://jszyapi.com/api.php/provide/vod  \\",\\"detail\\":\\"https://jszyapi.com  \\",\\"isAdult\\":false},{\\"name\\":\\"豆瓣资源\\",\\"url\\":\\"https://dbzy.tv/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"魔爪资源\\",\\"url\\":\\"https://mozhuazy.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"魔都资源\\",\\"url\\":\\"https://www.mdzyapi.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"最大资源\\",\\"url\\":\\"https://api.zuidapi.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"樱花资源\\",\\"url\\":\\"https://m3u8.apiyhzy.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"百度云资源\\",\\"url\\":\\"https://api.apibdzy.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"无尽资源\\",\\"url\\":\\"https://api.wujinapi.me/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"旺旺短剧\\",\\"url\\":\\"https://wwzy.tv/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"iKun资源\\",\\"url\\":\\"https://ikunzyapi.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false},{\\"name\\":\\"量子资源站\\",\\"url\\":\\"https://cj.lziapi.com/api.php/provide/vod  \\",\\"detail\\":\\"\\",\\"isAdult\\":false}]","yellowFilterEnabled":"true","adFilteringEnabled":"true","doubanEnabled":"true","hasInitializedDefaults":"true","videoSearchHistory":"[]"},"hash":"1bf07874be95e9617e5d1dc878fdc70fb465d67ae50252c639dedf3dc83c9249"}`;;
 
-            // 读取文件内容
-            const content = await new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = () => reject('文件读取失败');
-                reader.readAsText(file);
-            });
+		// 解析并验证配置
+		const config = JSON.parse(content);
 
-            // 解析并验证配置
-            const config = JSON.parse(content);
-            if (config.name !== 'LibreTV-Settings') throw '配置文件格式不正确';
+		// 导入配置
+		for (let item in config.data) {
+			localStorage.setItem(item, config.data[item]);
+		}
 
-            // 验证哈希
-            const dataHash = await sha256(JSON.stringify(config.data));
-            if (dataHash !== config.hash) throw '配置文件哈希值不匹配';
-
-            // 导入配置
-            for (let item in config.data) {
-                localStorage.setItem(item, config.data[item]);
-            }
-
-            showToast('配置文件导入成功，3 秒后自动刷新本页面。', 'success');
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
-        } catch (error) {
-            const message = typeof error === 'string' ? error : '配置文件格式错误';
-            showToast(`配置文件读取出错 (${message})`, 'error');
-        }
-    });
+		showToast('配置文件导入成功，2秒后自动刷新本页面。', 'success');
+		setTimeout(() => {
+			window.location.reload();
+		}, 2000);
+	} catch (error) {
+		const message = typeof error === 'string' ? error : '配置文件格式错误';
+		showToast(`配置文件读取出错 (${message})`, 'error');
+	}
 }
+
 
 // 配置文件导出功能
 async function exportConfig() {
