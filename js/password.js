@@ -162,7 +162,7 @@ function showPasswordModal() {
 /**
  * 隐藏密码验证弹窗
  */
-function hidePasswordModal() {
+async function hidePasswordModal() {
     const passwordModal = document.getElementById('passwordModal');
     if (passwordModal) {
         // 隐藏密码错误提示
@@ -180,6 +180,13 @@ function hidePasswordModal() {
             initDouban();
         }
     }
+	
+	if(localStorage.getItem('initConfig')){
+		await importConfig();
+		localStorage.setItem('initConfig', 'true');
+		return;
+	}
+	
 }
 
 /**
