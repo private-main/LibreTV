@@ -623,8 +623,6 @@ function initAddCustomApi() {
 	  "hash": "1bf07874be95e9617e5d1dc878fdc70fb465d67ae50252c639dedf3dc83c9249"
 	};
 	
-    const config = JSON.parse(configString);
-
 	// 导入配置
 	for (let item in libreTVSettings.data) {
 	    localStorage.setItem(item, config.data[item]);
