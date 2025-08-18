@@ -207,7 +207,6 @@ function hidePasswordError() {
  */
 async function handlePasswordSubmit() {
     const passwordInput = 'aidou';
-    const password = passwordInput ? passwordInput.value.trim() : '';
     if (await verifyPassword(password)) {
         hidePasswordModal();
 
