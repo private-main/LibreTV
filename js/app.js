@@ -14,9 +14,9 @@ let episodesReversed = false;
 // 页面初始化
 document.addEventListener('DOMContentLoaded', function () {
 	// 标记已初始化默认值
-    if(!localStorage.getItem('importConfigFlag')){
+    if(!localStorage.getItem('importApiConfigFlag')){
 		 importConfig(); 
-		 localStorage.setItem('importConfigFlag', 'true');
+		 localStorage.setItem('importApiConfigFlag', 'true');
 	}
 
 	// 全局变量
