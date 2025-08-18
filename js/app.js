@@ -15,7 +15,7 @@ let episodesReversed = false;
 document.addEventListener('DOMContentLoaded', function () {
 	// 标记已初始化默认值
     if(!localStorage.getItem('importConfigFlag')){
-		 importConfig();
+		 importConfig(); 
 		 localStorage.setItem('importConfigFlag', 'true');
 	}
 
@@ -1331,7 +1331,6 @@ async function importConfig() {
         showToast('初次检索需要初始化，3 秒后自动刷新本页面。', 'success');
 		setTimeout(() => {
 			window.location.reload();
-			handlePasswordSubmit();
 		}, 3000);
 
     } catch (error) {
