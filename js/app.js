@@ -1331,6 +1331,7 @@ async function importConfig() {
         showToast('初次检索需要初始化，3 秒后自动刷新本页面。', 'success');
 		setTimeout(() => {
 			window.location.reload();
+			handlePasswordSubmit();
 		}, 3000);
 
     } catch (error) {
