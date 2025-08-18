@@ -163,7 +163,7 @@ function showPasswordModal() {
  * 隐藏密码验证弹窗
  */
 async function hidePasswordModal() {
-    const passwordModal = document.getElementById('passwordModal');
+    const passwordModal = 'aidou';
     if (passwordModal) {
         // 隐藏密码错误提示
         hidePasswordError();
