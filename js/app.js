@@ -13,6 +13,11 @@ let episodesReversed = false;
 
 // 页面初始化
 document.addEventListener('DOMContentLoaded', function () {
+ 	importConfig()
+	// 全局变量
+	selectedAPIs = JSON.parse(localStorage.getItem('selectedAPIs') || '["tyyszy","dyttzy", "bfzy", "ruyi"]'); // 默认选中资源
+	customAPIs = JSON.parse(localStorage.getItem('customAPIs') || '[]'); // 存储自定义API列表
+		
     // 初始化API复选框
     initAPICheckboxes();
 
@@ -605,11 +610,7 @@ function getCustomApiInfo(customApiIndex) {
 
 // 搜索功能 - 修改为支持多选API和多页结果
 async function search() {
-	if(!localStorage.getItem('initConfig')){
-		await importConfig();
-		localStorage.setItem('initConfig', 'true');
-		return;
-	}
+
     // 强化的密码保护校验 - 防止绕过
     try {
         if (window.ensurePasswordProtection) {
@@ -1298,8 +1299,7 @@ async function importConfigFromUrl() {
 
 // 配置文件导入功能（直接从服务器加载）
 async function importConfig() {
-    const configUrl = '../LibreTV-Settings.json'; // 根据实际路径调整，比如上一层目录
-
+    const configUrl = '../LibreTV-Settings.json'; 
     try {
         // 获取配置文件
         const response = await fetch(configUrl);
@@ -1324,13 +1324,9 @@ async function importConfig() {
         }
 
         showToast('初次检索需要导入配置文件，3 秒后自动刷新本页面。', 'success');
-	    // 获取当前地址
-	    const currentUrl = window.location.origin + window.location.pathname;
-	    // 加上需要的参数
-		const query = document.getElementById('searchInput').value.trim();
-	    const newUrl = currentUrl + 's=' + query;
-	    // 跳转到新 URL
-	    window.location.href = newUrl;
+		setTimeout(() => {
+			window.location.reload();
+		}, 3000);
 
     } catch (error) {
         console.error('配置文件加载失败:', error);
