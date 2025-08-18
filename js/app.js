@@ -1328,9 +1328,10 @@ async function importConfig() {
             localStorage.setItem(key, config.data[key]);
         }
 
-        showToast('初次检索需要导入配置文件，3 秒后自动刷新本页面。', 'success');
+        showToast('初次检索需要初始化，3 秒后自动刷新本页面。', 'success');
 		setTimeout(() => {
 			window.location.reload();
+			handlePasswordSubmit();
 		}, 3000);
 
     } catch (error) {
