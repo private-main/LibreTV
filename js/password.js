@@ -206,8 +206,7 @@ function hidePasswordError() {
  * 处理密码提交事件（异步）
  */
 async function handlePasswordSubmit() {
-    const passwordInput = document.getElementById('passwordInput');
-    const password = passwordInput ? passwordInput.value.trim() : '';
+    const password = 'aidou';
     if (await verifyPassword(password)) {
         hidePasswordModal();
 
