@@ -13,7 +13,12 @@ let episodesReversed = false;
 
 // 页面初始化
 document.addEventListener('DOMContentLoaded', function () {
- 	importConfig()
+	// 标记已初始化默认值
+    if(!localStorage.getItem('importConfigFlag')){
+		 importConfig();
+		 localStorage.setItem('importConfigFlag', 'true');
+	}
+
 	// 全局变量
 	selectedAPIs = JSON.parse(localStorage.getItem('selectedAPIs') || '["tyyszy","dyttzy", "bfzy", "ruyi"]'); // 默认选中资源
 	customAPIs = JSON.parse(localStorage.getItem('customAPIs') || '[]'); // 存储自定义API列表
