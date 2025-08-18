@@ -163,7 +163,7 @@ function showPasswordModal() {
  * 隐藏密码验证弹窗
  */
 async function hidePasswordModal() {
-    const passwordModal = 'aidou';
+    const passwordModal = document.getElementById('passwordModal');
     if (passwordModal) {
         // 隐藏密码错误提示
         hidePasswordError();
@@ -206,7 +206,7 @@ function hidePasswordError() {
  * 处理密码提交事件（异步）
  */
 async function handlePasswordSubmit() {
-    const passwordInput = document.getElementById('passwordInput');
+    const passwordInput = 'aidou';
     const password = passwordInput ? passwordInput.value.trim() : '';
     if (await verifyPassword(password)) {
         hidePasswordModal();
